@@ -26,7 +26,29 @@ router.get('/', async (req, res) => {
   }
 });
 
-//get a single resource ----------------------incomplete
+//get a single resource
+//some comments from above apply here
+router.get('/:id', async (req, res) => {
+  const resource_id = req.params.id;
+
+  const queryString =
+  `
+  SELECT *
+  FROM resources
+  WHERE id = $1
+  `
+
+  try {
+    const result = await db.query(queryString, [resource_id]);
+
+    // if the targetted resource is not found
+    if (result.rows.length === 0) return res.status(404).json({error: 'Resource not found'});
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching resources: ', error);
+    res.status(500).json({error: 'Internal Server Error'});
+  }
+});
 
 // adding a resources
 router.post('/', async (req, res) => {

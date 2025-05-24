@@ -173,7 +173,6 @@ router.delete('/:id', async (req, res) => {
   FROM resources
   WHERE id = $1 AND author_id = $2
   `;
-
   const deleteResourceQueryString =
   `DELETE FROM resources
   WHERE id = $1

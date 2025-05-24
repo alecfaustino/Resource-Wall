@@ -7,5 +7,6 @@ CREATE TABLE resource_ratings (
   rating INTEGER CHECK (rating >= 1 AND rating <= 5), -- star rating from 1 to 5
   -- to support half-star in the future, use:
   -- rating NUMERIC(2,1) CHECK (rating >= 1 AND rating <= 5)
+  created_at TIMESTAMP DEFAULT NOW(),
   UNIQUE(user_id, resource_id) -- ensures a user can rate this resource only once
 )

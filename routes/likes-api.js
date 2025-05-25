@@ -85,5 +85,30 @@ router.get('/', async (req, res) => {
 
 // check to see if a user liked a resource (to be used for toggling a filled heart/unfilled heart for a specific user's view
 
+router.get('/:resource_id', async (req, res) => {
+  const userId = req.query.user_id || 1;
+  const resourceId = req.params.resource_id;
+
+  const checkUserLikedQueryString =
+  `
+  SELECT *
+  FROM resource_likes
+  WHERE user_id = $1 AND resource_id = $2
+  `;
+  const checkUserLikedQueryValues = [userId, resourceId];
+
+  try {
+    const checkResults = await db.query(checkUserLikedQueryString, checkUserLikedQueryValues);
+    // if something is returned, then the resource_likes table has record of user_id liking a specific resource_id
+    const liked = checkResults.rows.length > 0;
+    //boolean if liked.
+    res.status(200).json({userLiked: liked});
+
+  } catch (error) {
+    console.error('Error checking if user liked this resource: ', error);
+    res.status(500).json({error: `Internal Server Error`});
+  }
+});
+
 
 module.exports = router;

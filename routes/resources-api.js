@@ -89,7 +89,7 @@ router.post('/', async (req, res) => {
     // sending json just for testing -- eventually this will be a redirect back to the home page when we have it set up
     res.status(201).json({
       resource,
-      link
+      link: linkResultRow
     })
   } catch (error) {
     console.error('Error creating resource with link: ', error);

@@ -7,8 +7,21 @@ const router  = express.Router();
  * Will later be updated to display all saved and liked resources.
  */
 
+
 router.get('/', (req, res) => {
-  res.render('resources');
+
+  // Temporary hardcoded data
+  const userResources = [
+    { id: 1, title: 'Titile', description: 'Description', url: 'Url here', author: 'Vika' },
+    { id: 2, title: 'Titile', description: 'Description', url: 'Url here', author: 'Vika' }
+  ];
+
+  const likedResources = [
+    { id: 3, title: 'Titile', description: 'Description', url: 'Url here', author: 'Vika' },
+    { id: 4, title: 'Titile', description: 'Description', url: 'Url here', author: 'Vika' }
+  ];
+
+  res.render('resources', { userResources, likedResources });
 });
 
 

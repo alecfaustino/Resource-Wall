@@ -91,11 +91,14 @@ router.post('/', async (req, res) => {
     const linkResult = await db.query(linkQueryString, linkQueryValues);
     const linkResultRow = linkResult.rows[0];
 
+    // TODO: remove this commented block below after testing
     // sending json just for testing -- eventually this will be a redirect back to the home page when we have it set up
-    res.status(201).json({
-      resource,
-      link: linkResultRow
-    })
+    // res.status(201).json({
+    //   resource,
+    //   link: linkResultRow
+    // })
+
+    res.redirect('/');
   } catch (error) {
     console.error('Error creating resource with link: ', error);
     res.status(500).json({

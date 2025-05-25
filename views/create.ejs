@@ -24,7 +24,7 @@
 
   <!-- Scripts -->
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="../public/scripts/app.js"></script>
+  <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
@@ -33,7 +33,7 @@
     <main>
       <h1>Create New Card</h1>
 
-      <form id="create-form" class="border p-4 rounded bg-light" method="POST" action="/resources">
+      <form id="create-form" class="border p-4 rounded bg-light" method="POST" action="/api/resources">
         <!-- Card title -->
         <div>
           <label for="card-title">Card title</label>
@@ -49,17 +49,17 @@
         <!-- Link info -->
         <div>
           <label for="link-name">Resource Name</label>
-          <input type="text" name="linkName" id="link-name" class="form-control" required>
+          <input type="text" name="link[name]" id="link-name" class="form-control" required>
         </div>
 
         <div>
           <label for="link-url">URL</label>
-          <input type="url" id="link-url" name="linkUrl" class="form-control" required>
+          <input type="url" id="link-url" name="link[url]" class="form-control" required>
         </div>
 
         <div>
           <label for="link-description">Resource Description</label>
-          <textarea id="link-description" name="linkDescription" rows="3" class="form-control" required></textarea>
+          <textarea id="link-description" name="link[description]" rows="3" class="form-control" required></textarea>
         </div>
 
         <!-- Choose topic -->

@@ -5,7 +5,8 @@ const db = require('../db/connection')
 
 // like a resource
 router.post('/:resource_id', async (req, res) => {
-  const userId = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const userId = req.session.user_id || 1;
   const resourceId = req.params.resource_id;
   const likeQueryString =
   `INSERT INTO resource_likes (user_id, resource_id, created_at)
@@ -37,7 +38,7 @@ router.post('/:resource_id', async (req, res) => {
 
 // unliking a resources
 router.delete('/:resource_id', async (req, res) => {
-  const userId = req.query.user_id || 1;
+  const userId = req.session.user_id || 1;
   const resourceId = req.params.resource_id;
   const unlikeQueryString =
   `DELETE FROM resource_likes
@@ -65,7 +66,8 @@ router.delete('/:resource_id', async (req, res) => {
 
 // get all of a users likes
 router.get('/', async (req, res) => {
-  const userId = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const userId = req.session.user_id || 1;
   const userLikesQueryString =
   `
   SELECT *
@@ -86,7 +88,8 @@ router.get('/', async (req, res) => {
 // check to see if a user liked a resource (to be used for toggling a filled heart/unfilled heart for a specific user's view
 
 router.get('/:resource_id', async (req, res) => {
-  const userId = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const userId = req.session.user_id || 1;
   const resourceId = req.params.resource_id;
 
   const checkUserLikedQueryString =

@@ -96,7 +96,6 @@ router.post('/', async (req, res) => {
       link: linkResultRow
     })
 
-    res.redirect('/');
   } catch (error) {
     console.error('Error creating resource with link: ', error);
     res.status(500).json({

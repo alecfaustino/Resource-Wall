@@ -21,4 +21,16 @@ router.get('/', (req, res) => {
     });
 });
 
+// when the user clicks 'login' button
+// for now, hard coded and will just be used to set req.session.user_id
+// for instance, if we route to /login/3 it would set the req.session.user_id to 3.
+router.post('/login/:user_id', (req, res) => {
+  const { user_id } = req.params;
+  // set the cookie.user_id
+  req.session.user_id = user_id;
+  res.json({ message: `Logged in as user ${user_id}`});
+
+});
+// TODO: Change the other routes to use req.session.user_id instead of req.query.user_id
+
 module.exports = router;

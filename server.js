@@ -27,6 +27,7 @@ const usersRoutes = require('./routes/users');
 const resourcesRoutes = require('./routes/resources.js')
 const resourcesApiRoutes = require('./routes/resources-api');
 const profileRoutes = require('./routes/profile');
+const createResourceRoutes = require('./routes/create');
 
 
 // Mount all resource routes
@@ -40,6 +41,7 @@ app.use('/api/resources', resourcesApiRoutes);
 
 app.use('/resources', resourcesRoutes);
 app.use('/profile', profileRoutes);
+app.use('/create', createResourceRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).

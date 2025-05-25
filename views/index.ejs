@@ -29,11 +29,47 @@
   <!-- Scripts -->
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <!-- Masonry CDN -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 </head>
 
 <body>
     <%- include('partials/header') %>
 
-     <h1>Have fun! 🥔</h1>
+<main class="container pt-5 mt-4">
+
+  <!-- Search Bar -->
+  <div class="search-bar mb-4 d-flex justify-content-center">
+    <input
+      type="text"
+      class="form-control search-input"
+      placeholder="Search resources..."
+      style="max-width: 500px;"
+    />
+  </div>
+
+  <h1 class="mb-4 text-center">Browse</h1>
+
+
+  <!-- Masonry Grid -->
+  <div
+    class="masonry-grid"
+    data-masonry='{"itemSelector": ".masonry-item", "gutter": 16}'
+  >
+    <% for (let i = 0; i < 10; i++) { %>
+      <div class="masonry-item">
+        <%- include('partials/resource_card', {
+          resource: {
+            title: `Resource name`,
+            description: 'Card description',
+            url: '#',
+            author: 'User'
+          }
+        }) %>
+      </div>
+    <% } %>
+  </div>
+</main>
+
   </body>
 </html>

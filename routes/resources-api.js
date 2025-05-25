@@ -53,7 +53,8 @@ router.get('/:id', async (req, res) => {
 // adding a resources
 router.post('/', async (req, res) => {
   // This line makes the user_id equal to whatever we put in the url params (we are hard coding this for this project)
-  const user_id = req.query.user_id;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const user_id = req.session.user_id || 1;
 
   // values from the form (front end)
   const {title, description, link} = req.body;
@@ -104,7 +105,8 @@ router.post('/', async (req, res) => {
 //using patch as we'd only be updating a part of the resource
 router.patch('/:id', async (req, res) => {
   const resource_id = req.params.id;
-  const user_Id = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const user_Id = req.session.user_id || 1;
   const { title, description, link } = req.body;
   const editResourceQueryString =
   `UPDATE resources
@@ -165,7 +167,8 @@ router.patch('/:id', async (req, res) => {
 // Will redirect when views are created.
 router.delete('/:id', async (req, res) => {
   const resource_id = req.params.id;
-  const user_id = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const user_id = req.session.user_id || 1;
 
   // to check if the user owns the resource
   const resourceOwnerQueryString =

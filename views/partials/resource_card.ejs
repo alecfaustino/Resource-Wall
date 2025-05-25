@@ -21,16 +21,14 @@
       <!-- when working on styling should change these emojies for icons-->
 
       <div class="rating">
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
+        <% for (let i = 1; i <= 5; i++) { %>
+          <i class="fa-solid fa-star" data-index="<%= i %>"></i>
+          <% } %>
       </div>
 
       <!-- Comments Button -->
       <button class="comment-btn">
-       <i class="fa-solid fa-comment"></i>
+        <i class="fa-solid fa-comment"></i>
       </button>
 
       <!-- Like Button -->

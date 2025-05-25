@@ -4,7 +4,7 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
-
+const cookieSession = require('cookie-session');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -18,6 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 // Allowing express to parse JSON -- using for postman
 app.use(express.json());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['abcdefg']
+}))
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -29,6 +33,7 @@ const resourcesApiRoutes = require('./routes/resources-api');
 const profileRoutes = require('./routes/profile');
 const createResourceRoutes = require('./routes/create');
 
+const likesApiRoutes = require('./routes/likes-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -42,6 +47,7 @@ app.use('/api/resources', resourcesApiRoutes);
 app.use('/resources', resourcesRoutes);
 app.use('/profile', profileRoutes);
 app.use('/create', createResourceRoutes);
+app.use('/api/likes', likesApiRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).

@@ -53,7 +53,8 @@ router.get('/:id', async (req, res) => {
 // adding a resources
 router.post('/', async (req, res) => {
   // This line makes the user_id equal to whatever we put in the url params (we are hard coding this for this project)
-  const user_id = req.query.user_id;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const userId = req.session.user_id || 1;
 
   // values from the form (front end)
   const {title, description, link} = req.body;
@@ -77,8 +78,12 @@ router.post('/', async (req, res) => {
   `;
 
   try {
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     // insert into resources
-    const resourceQueryValues = [ user_id , title, description];
+    const resourceQueryValues = [ userId , title, description];
     const resourceResult = await db.query(resourceQueryString, resourceQueryValues);
     const resource = resourceResult.rows[0];
     // insert into resource_links
@@ -89,7 +94,7 @@ router.post('/', async (req, res) => {
     // sending json just for testing -- eventually this will be a redirect back to the home page when we have it set up
     res.status(201).json({
       resource,
-      link
+      link: linkResultRow
     })
   } catch (error) {
     console.error('Error creating resource with link: ', error);
@@ -104,7 +109,8 @@ router.post('/', async (req, res) => {
 //using patch as we'd only be updating a part of the resource
 router.patch('/:id', async (req, res) => {
   const resource_id = req.params.id;
-  const user_Id = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const userId = req.session.user_id || 1;
   const { title, description, link } = req.body;
   const editResourceQueryString =
   `UPDATE resources
@@ -130,10 +136,14 @@ router.patch('/:id', async (req, res) => {
   WHERE id = $1 AND author_id = $2
   `;
   // values to see if the resource_id = the one in the req.params and the user id, too.
-  const resourceOwnerQueryStringValues = [resource_id, user_Id];
+  const resourceOwnerQueryStringValues = [resource_id, userId];
 
   try {
 
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     if (!title || !link || !link.name || !link.url) return res.status(400).json({error: 'Missing required fields'});
 
     const resourceOwnerQueryResult = await db.query(resourceOwnerQueryString, resourceOwnerQueryStringValues);
@@ -165,7 +175,8 @@ router.patch('/:id', async (req, res) => {
 // Will redirect when views are created.
 router.delete('/:id', async (req, res) => {
   const resource_id = req.params.id;
-  const user_id = req.query.user_id || 1;
+  // TODO: REMOVE || 1 after development -- this is for postman testing
+  const userId = req.session.user_id || 1;
 
   // to check if the user owns the resource
   const resourceOwnerQueryString =
@@ -173,16 +184,19 @@ router.delete('/:id', async (req, res) => {
   FROM resources
   WHERE id = $1 AND author_id = $2
   `;
-
   const deleteResourceQueryString =
   `DELETE FROM resources
   WHERE id = $1
   RETURNING *
   `;
 
-  const resourceOwnerQueryValues = [resource_id, user_id];
+  const resourceOwnerQueryValues = [resource_id, userId];
 
   try {
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     const resourceOwnerQueryResult = await db.query(resourceOwnerQueryString, resourceOwnerQueryValues);
 
     if (resourceOwnerQueryResult.rows.length === 0) return res.status(403).json({ error: 'Unauthorized access to delete this resource'});

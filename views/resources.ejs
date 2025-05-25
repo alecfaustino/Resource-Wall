@@ -33,6 +33,25 @@
 
 <body>
     <%- include('partials/header') %>
-<main class="container pt-5 mt-5">
+<main>
+    <!-- Created Resources -->
+  <section >
+    <h2>Your Resources</h2>
+    <div>
+      <% userResources.forEach(resource => { %>
+        <%- include('partials/resource_card', { resource }) %>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Liked Resources -->
+  <section >
+    <h2>Your Likes</h2>
+    <div>
+      <% likedResources.forEach(resource => { %>
+        <%- include('partials/resource_card', { resource }) %>
+      <% }) %>
+    </div>
+  </section>
   </main>
 </html>

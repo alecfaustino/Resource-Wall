@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;">
+<div class="resource-card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">
       <%= resource.title %>
@@ -6,28 +6,39 @@
     <p class="card-text">
       <%= resource.description %>
     </p>
+
+    <div class="topic-box">
+      <p class="card-text">
+        <%= resource.topic%>
+      </p>
+    </div>
   </div>
-  <div class="card-footer text-muted">
-    Posted by: <%= resource.author %>
-      <div>
-        <!-- Average Rating
+  <div class="card-footer">
+    <span class="author">Posted by: <%= resource.author %></span>
+    <div class="card-actions">
+      <!-- Average Rating
      should think how user can rate resource-->
-        <!-- when working on styling should change these emojies for icons-->
+      <!-- when working on styling should change these emojies for icons-->
 
-        <div class="rating">
-          ⭐⭐⭐⭐⭐
-        </div>
-
-        <!-- Comments Button -->
-        <button>
-          💬
-        </button>
-
-        <!-- Like Button -->
-        <button>
-          ❤️
-        </button>
+      <div class="rating">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
       </div>
+
+      <!-- Comments Button -->
+      <button class="comment-btn">
+       <i class="fa-solid fa-comment"></i>
+      </button>
+
+      <!-- Like Button -->
+      <button class="like-btn">
+        <i class="fa-solid fa-heart"></i>
+      </button>
+
+    </div>
   </div>
 
 </div>

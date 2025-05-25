@@ -33,6 +33,26 @@
 
 <body>
     <%- include('partials/header') %>
-<main class="container pt-5 mt-5">
-  </main>
+
+<main>
+  <h1>Add a New Resource</h1>
+
+  <form id="create-form" class="border p-4 rounded bg-light">
+    <!-- Card title -->
+    <div>
+      <label for="card-title">Card title</label>
+      <input type="text" required>
+    </div>
+
+    <!-- Card description -->
+      <div>
+      <label for="card-description">Description</label>
+      <input type="text" required>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success">Submit Resource</button>
+  </form>
+</main>
 </html>

@@ -1,0 +1,17 @@
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  background-color:aliceblue;
+
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+
+    .card-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }

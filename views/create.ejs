@@ -4,9 +4,9 @@
 <head>
   <title>Home Page</title>
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
@@ -14,13 +14,9 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-      crossorigin="anonymous"
-    />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -32,27 +28,59 @@
 </head>
 
 <body>
-    <%- include('partials/header') %>
+  <%- include('partials/header') %>
 
-<main>
-  <h1>Add a New Resource</h1>
+    <main>
+      <h1>Create New Card</h1>
 
-  <form id="create-form" class="border p-4 rounded bg-light">
-    <!-- Card title -->
-    <div>
-      <label for="card-title">Card title</label>
-      <input type="text" required>
-    </div>
+      <form id="create-form" class="border p-4 rounded bg-light">
+        <!-- Card title -->
+        <div>
+          <label for="card-title">Card title</label>
+          <input type="text" required>
+        </div>
 
-    <!-- Card description -->
-      <div>
-      <label for="card-description">Description</label>
-      <input type="text" required>
-    </div>
+        <!-- Card description -->
+        <div>
+          <label for="card-description">Card description</label>
+          <input type="text" required>
+        </div>
+
+        <!-- Link info -->
+        <div>
+          <label for="link-name">Resource Name</label>
+          <input type="text" id="link-name" class="form-control" required>
+        </div>
+
+        <div>
+          <label for="link-url">URL</label>
+          <input type="url" id="link-url" class="form-control" required>
+        </div>
+
+        <div>
+          <label for="link-description">Resource Description</label>
+          <textarea id="link-description" rows="3" class="form-control" required></textarea>
+        </div>
+
+        <!-- Choose topic -->
+         <!-- hard coded topics for now-->
+        <div>
+          <label for="topic">Topic</label>
+          <select id="topic" class="form-control" required>
+            <option value="">Choose a topic</option>
+            <option value="1">JavaScript</option>
+            <option value="2">SQL</option>
+            <option value="3">CSS</option>
+            <option value="4">Design</option>
+            <option value="5">Git</option>
+          </select>
+        </div>
 
 
 
-    <button type="submit" class="btn btn-success">Submit Resource</button>
-  </form>
-</main>
+
+        <button type="submit" class="btn btn-success">Submit Resource</button>
+      </form>
+    </main>
+
 </html>

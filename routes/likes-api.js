@@ -17,6 +17,10 @@ router.post('/:resource_id', async (req, res) => {
   const likeQueryValues = [userId, resourceId];
   try {
 
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     // if the resource doesn't exist error handling
     if (!resourceId) return res.status(404).json({error: 'Resource not found'});
 
@@ -49,6 +53,10 @@ router.delete('/:resource_id', async (req, res) => {
 
 
   try {
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     if (!resourceId) return res.status(404).json({error: 'Resource not found'});
     const unlikeQueryResult = await db.query(unlikeQueryString, unlikeQueryValues);
 
@@ -76,6 +84,10 @@ router.get('/', async (req, res) => {
   `;
 
   try {
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     const userLikesResult = await db.query(userLikesQueryString, [userId]);
     // show all the rows
     res.status(200).json(userLikesResult.rows);
@@ -101,6 +113,10 @@ router.get('/:resource_id', async (req, res) => {
   const checkUserLikedQueryValues = [userId, resourceId];
 
   try {
+    // validate if logged in
+    if (!userId) {
+      return res.status(403).json({ error: 'Not authorized' });
+    }
     const checkResults = await db.query(checkUserLikedQueryString, checkUserLikedQueryValues);
     // if something is returned, then the resource_likes table has record of user_id liking a specific resource_id
     const liked = checkResults.rows.length > 0;

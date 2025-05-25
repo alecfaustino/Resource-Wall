@@ -64,7 +64,24 @@ router.delete('/:resource_id', async (req, res) => {
 });
 
 // get all of a users likes
-// router.get()
+router.get('/', async (req, res) => {
+  const userId = req.query.user_id || 1;
+  const userLikesQueryString =
+  `
+  SELECT *
+  FROM resource_likes
+  WHERE user_id = $1
+  `;
+
+  try {
+    const userLikesResult = await db.query(userLikesQueryString, [userId]);
+    // show all the rows
+    res.status(200).json(userLikesResult.rows);
+  } catch (error) {
+    console.error('Error getting all user likes: ', error);
+    res.status(500).json({error: `Internal Server Error`});
+  }
+});
 
 // check to see if a user liked a resource (to be used for toggling a filled heart/unfilled heart for a specific user's view
 

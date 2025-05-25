@@ -11,33 +11,33 @@
     <main>
       <h1>Create New Card</h1>
 
-      <form id="create-form" class="border p-4 rounded bg-light">
+      <form id="create-form" class="border p-4 rounded bg-light" method="POST" action="/api/resources">
         <!-- Card title -->
         <div>
           <label for="card-title">Card title</label>
-          <input type="text" required>
+          <input type="text" name="title" required>
         </div>
 
         <!-- Card description -->
         <div>
           <label for="card-description">Card description</label>
-          <input type="text" required>
+          <input type="text" name="description" required>
         </div>
 
         <!-- Link info -->
         <div>
           <label for="link-name">Resource Name</label>
-          <input type="text" id="link-name" class="form-control" required>
+          <input type="text" name="link[name]" id="link-name" class="form-control" required>
         </div>
 
         <div>
           <label for="link-url">URL</label>
-          <input type="url" id="link-url" class="form-control" required>
+          <input type="url" id="link-url" name="link[url]" class="form-control" required>
         </div>
 
         <div>
           <label for="link-description">Resource Description</label>
-          <textarea id="link-description" rows="3" class="form-control" required></textarea>
+          <textarea id="link-description" name="link[description]" rows="3" class="form-control" required></textarea>
         </div>
 
         <!-- Choose topic -->
@@ -53,9 +53,6 @@
             <option value="5">Git</option>
           </select>
         </div>
-
-
-
 
         <button type="submit" class="btn btn-success">Submit Resource</button>
       </form>

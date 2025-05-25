@@ -32,5 +32,13 @@ router.post('/login/:user_id', (req, res) => {
 
 });
 // TODO: Change the other routes to use req.session.user_id instead of req.query.user_id
+// can still add a || 1 for postman testing purposes.
+
+// mock logout
+// clear cookie session
+router.post('/logout', (req, res) => {
+  req.session = null;
+  res.json({ message: 'Logged out'});
+})
 
 module.exports = router;

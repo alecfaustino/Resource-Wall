@@ -4,7 +4,7 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
-
+const cookieSession = require('cookie-session');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -18,6 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 // Allowing express to parse JSON -- using for postman
 app.use(express.json());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['abcdefg']
+}))
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own

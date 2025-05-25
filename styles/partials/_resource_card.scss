@@ -1,17 +1,38 @@
 .resource-card {
   display: flex;
   flex-direction: column;
-  background-color:aliceblue;
+  background-color: aliceblue;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
 
 }
 
 .card-footer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    .card-actions {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+  .card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    i {
+      font-size: 1.2rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.3);
+         color: gold; // Current star
+      }
+
+
     }
   }
+}

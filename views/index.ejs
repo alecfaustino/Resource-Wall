@@ -6,42 +6,39 @@
 </head>
 
 <body>
-    <%- include('partials/header') %>
+  <%- include('partials/header') %>
 
-<main class="container pt-5 mt-4">
+  <main class="container pt-5 mt-4">
 
-  <!-- Search Bar -->
-  <div class="search-bar mb-4 d-flex justify-content-center">
-    <input
-      type="text"
-      class="form-control search-input"
-      placeholder="Search resources..."
-      style="max-width: 500px;"
-    />
-  </div>
+    <!-- Search Bar -->
+    <div class="search-bar mb-4 d-flex justify-content-center">
+      <input
+        type="text"
+        class="form-control search-input"
+        placeholder="Search resources..."
+        style="max-width: 500px;"
+      />
+    </div>
 
-  <h1 class="mb-4 text-center">Browse</h1>
+    <h1 class="mb-4 text-center">Browse</h1>
 
 
-  <!-- Masonry Grid -->
-  <div
-    class="masonry-grid"
-    data-masonry='{"itemSelector": ".masonry-item", "gutter": 16}'
-  >
-    <% for (let i = 0; i < 10; i++) { %>
-      <div class="masonry-item">
-        <%- include('partials/resource_card', {
-          resource: {
-            title: `Resource name`,
-            description: 'Card description',
-            url: '#',
-            author: 'User'
-          }
-        }) %>
-      </div>
-    <% } %>
-  </div>
-</main>
+    <!-- Masonry Grid -->
+    <div
+      class="masonry-grid"
+      data-masonry='{"itemSelector": ".masonry-item", "gutter": 20}'>
+      <% if (resources.length===0) { %>
+        <p class="text-center">No resources found.</p>
+        <% } else { %>
+          <% resources.forEach(resource=> { %>
+            <div class="masonry-item">
+              <%- include('partials/resource_card', { resource }) %>
+            </div>
+          <% }) %>
+        <% } %>
+    </div>
+  </main>
 
-  </body>
+</body>
+
 </html>

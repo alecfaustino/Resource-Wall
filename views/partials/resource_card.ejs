@@ -7,6 +7,15 @@
       <%= resource.description %>
     </p>
 
+     <!-- Resource Link -->
+    <% if (resource.link_name && resource.link_url) { %>
+      <p class="card-text">
+         <a href="<%= resource.link_url %>" target="_blank" rel="noopener noreferrer">
+          <%= resource.link_name %>
+        </a>
+      </p>
+    <% } %>
+
     <div class="topic-box">
       <p class="card-text">
         <%= resource.topic%>
@@ -18,7 +27,6 @@
     <div class="card-actions">
       <!-- Average Rating
      should think how user can rate resource-->
-      <!-- when working on styling should change these emojies for icons-->
 
       <div class="rating">
         <% for (let i = 1; i <= 5; i++) { %>

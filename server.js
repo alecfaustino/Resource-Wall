@@ -32,6 +32,7 @@ const resourcesRoutes = require('./routes/resources.js')
 const resourcesApiRoutes = require('./routes/resources-api');
 const profileRoutes = require('./routes/profile');
 const createResourceRoutes = require('./routes/create');
+const indexRoutes = require('./routes/index');
 
 const likesApiRoutes = require('./routes/likes-api');
 
@@ -49,12 +50,13 @@ app.use('/profile', profileRoutes);
 app.use('/create', createResourceRoutes);
 app.use('/api/likes', likesApiRoutes);
 // Home page
+app.use('/', indexRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// app.get('/', (req, res) => {
+//   res.render('index');
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -32,12 +32,14 @@
         <% } else { %>
           <% resources.forEach(resource=> { %>
             <div class="masonry-item">
-              <%- include('partials/resource_card', { resource }) %>
+              <%- include('partials/resource_card', { resource, userLiked: likedResourcesMap[resource.id] }) %>
             </div>
           <% }) %>
         <% } %>
     </div>
   </main>
+
+  <script src="/scripts/likes.js"></script>
 
 </body>
 

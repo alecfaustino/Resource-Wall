@@ -44,11 +44,11 @@
         <!-- userLiked will be a boolean -->
        <% const userLiked = likedResourceIds.includes(resource.id); %>
         <button class="like-btn" data-resource-id="<%= resource.id %>">
-
-          <i class="<%= userLiked ? 'fa-solid' : 'fa-regular' %> fa-heart"></i>
+          <i class="fa-<%= likedResourceIds.includes(resource.id) ? 'solid' : 'regular' %> fa-heart"></i>
         </button>
 
     </div>
   </div>
 
 </div>
+<script src="/scripts/likes.js"></script>

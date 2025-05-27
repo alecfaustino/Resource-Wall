@@ -13,7 +13,8 @@ $(document).ready(function () {
         name: $('#link-name').val(),
         url: $('#link-url').val(),
         description: $('#link-description').val()
-      }
+      },
+      topic: $('#topic').val()
     };
 
     $.ajax({

@@ -6,14 +6,39 @@ const db = require('../db/connection')
 // get all the resources
 router.get('/', async (req, res) => {
   // Order by Newest at the top
-  const queryString =
+  const search = req.query.search;
+  const queryParams = [];
+  let queryString =
   `
-    SELECT *
+    SELECT
+      resources.id,
+      resources.title,
+      resources.description,
+      resource_links.name AS link_name,
+      resource_links.url AS link_url,
+      topics.name AS topic,
+      users.name AS author
     FROM resources
-    ORDER BY created_at DESC
-  `
+    JOIN users ON users.id = resources.author_id
+    LEFT JOIN resource_links ON resource_links.resource_id = resources.id
+    LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
+    LEFT JOIN topics ON topics.id = resource_topics.topic_id
+  `;
+
+  if (search) {
+    queryString += `
+      WHERE
+        resources.title ILIKE $1 OR
+        resources.description ILIKE $1 OR
+        topics.name ILIKE $1
+    `;
+    queryParams.push(`%${search}%`);
+  }
+  queryString += ` ORDER BY resources.created_at DESC LIMIT 10;`;
+
+
   try {
-    const result = await db.query(queryString);
+    const result = await db.query(queryString, queryParams);
     res.json(result.rows);
   } catch (error) {
     // backend console message
@@ -98,6 +123,8 @@ router.post('/', async (req, res) => {
     const linkQueryValues = [resource.id, link.name, link.url, link.description];
     const linkResult = await db.query(linkQueryString, linkQueryValues);
     const linkResultRow = linkResult.rows[0];
+
+    // insert topic
     const topicsQueryValues = [resource.id, Number(topic)];
     const topicsResult = await db.query(topicQueryString, topicsQueryValues);
     // only a single topic (for now)

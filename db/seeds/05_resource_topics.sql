@@ -14,24 +14,24 @@ INSERT INTO resource_topics (resource_id, topic_id) VALUES (4, 4);
 INSERT INTO resource_topics (resource_id, topic_id) VALUES (5, 5);
 
 -- Resource 6: Async JavaScript
--- INSERT INTO resource_topics (resource_id, topic_id) VALUES (6, 1);
-INSERT INTO resource_topics (resource_id, topic_id) VALUES (6, 6);
+INSERT INTO resource_topics (resource_id, topic_id) VALUES (6, 1);
+-- INSERT INTO resource_topics (resource_id, topic_id) VALUES (6, 6);
 
 -- Resource 7: Responsive Web Design
--- INSERT INTO resource_topics (resource_id, topic_id) VALUES (7, 2);
-INSERT INTO resource_topics (resource_id, topic_id) VALUES (7, 6);
+INSERT INTO resource_topics (resource_id, topic_id) VALUES (7, 2);
+-- INSERT INTO resource_topics (resource_id, topic_id) VALUES (7, 6);
 
 -- Resource 8: Advanced SQL Queries
--- INSERT INTO resource_topics (resource_id, topic_id) VALUES (8, 3);
-INSERT INTO resource_topics (resource_id, topic_id) VALUES (8, 6);
+INSERT INTO resource_topics (resource_id, topic_id) VALUES (8, 3);
+-- INSERT INTO resource_topics (resource_id, topic_id) VALUES (8, 6);
 
 -- Resource 9: REST APIs with Express
--- INSERT INTO resource_topics (resource_id, topic_id) VALUES (9, 4);
-INSERT INTO resource_topics (resource_id, topic_id) VALUES (9, 6);
+INSERT INTO resource_topics (resource_id, topic_id) VALUES (9, 4);
+-- INSERT INTO resource_topics (resource_id, topic_id) VALUES (9, 6);
 
--- -- Resource 10: State Management in React
--- INSERT INTO resource_topics (resource_id, topic_id) VALUES (10, 5);
-INSERT INTO resource_topics (resource_id, topic_id) VALUES (10, 6);
+-- Resource 10: State Management in React
+INSERT INTO resource_topics (resource_id, topic_id) VALUES (10, 5);
+-- INSERT INTO resource_topics (resource_id, topic_id) VALUES (10, 6);
 
 -- Resource 11: Web Accessibility Basics
 INSERT INTO resource_topics (resource_id, topic_id) VALUES (11, 6);
@@ -46,5 +46,5 @@ INSERT INTO resource_topics (resource_id, topic_id) VALUES (13, 1);
 INSERT INTO resource_topics (resource_id, topic_id) VALUES (14, 6);
 
 -- Resource 15: Authentication in Web Apps
--- INSERT INTO resource_topics (resource_id, topic_id) VALUES (15, 4);
-INSERT INTO resource_topics (resource_id, topic_id) VALUES (15, 6);
+INSERT INTO resource_topics (resource_id, topic_id) VALUES (15, 4);
+-- INSERT INTO resource_topics (resource_id, topic_id) VALUES (15, 6);

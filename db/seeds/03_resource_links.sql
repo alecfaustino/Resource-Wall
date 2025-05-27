@@ -1,12 +1,16 @@
+-- Temporary commented out additional links added to a card as it was creating duplicated cards
+-- For now each card has only one resource link
+
+
 -- Resource 1: Mastering JavaScript
 INSERT INTO resource_links (resource_id, name, url, description)
 VALUES (1, 'MDN JavaScript Guide', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide', 'Comprehensive guide to JavaScript on MDN');
 
-INSERT INTO resource_links (resource_id, name, url, description)
-VALUES (1, 'JavaScript Info', 'https://javascript.info/', 'In-depth modern JavaScript tutorials and examples');
+-- INSERT INTO resource_links (resource_id, name, url, description)
+-- VALUES (1, 'JavaScript Info', 'https://javascript.info/', 'In-depth modern JavaScript tutorials and examples');
 
-INSERT INTO resource_links (resource_id, name, url, description)
-VALUES (1, 'Eloquent JavaScript (Book)', 'https://eloquentjavascript.net/', 'Free online book covering JS fundamentals and advanced topics');
+-- INSERT INTO resource_links (resource_id, name, url, description)
+-- VALUES (1, 'Eloquent JavaScript (Book)', 'https://eloquentjavascript.net/', 'Free online book covering JS fundamentals and advanced topics');
 
 
 -- Resource 2: Understanding CSS Flexbox
@@ -25,22 +29,22 @@ VALUES (4, 'Node.js Docs', 'https://nodejs.org/en/docs/', 'Official Node.js docu
 INSERT INTO resource_links (resource_id, name, url, description)
 VALUES (5, 'React Docs', 'https://react.dev/learn', 'Start learning React with official concepts and examples');
 
-INSERT INTO resource_links (resource_id, name, url, description)
-VALUES (5, 'React Beginner Project Ideas', 'https://github.com/MohammedAl-Rowad/react-beginner-projects', 'GitHub repo with mini React projects');
+-- INSERT INTO resource_links (resource_id, name, url, description)
+-- VALUES (5, 'React Beginner Project Ideas', 'https://github.com/MohammedAl-Rowad/react-beginner-projects', 'GitHub repo with mini React projects');
 
-INSERT INTO resource_links (resource_id, name, url, description)
-VALUES (5, 'Codecademy React Course', 'https://www.codecademy.com/learn/react-101', 'Interactive React course for new learners');
+-- INSERT INTO resource_links (resource_id, name, url, description)
+-- VALUES (5, 'Codecademy React Course', 'https://www.codecademy.com/learn/react-101', 'Interactive React course for new learners');
 
 
 -- Resource 6: Async JavaScript
 INSERT INTO resource_links (resource_id, name, url, description)
 VALUES (6, 'JavaScript Info: Async/Await', 'https://javascript.info/async-await', 'Detailed explanation of async/await with examples');
 
-INSERT INTO resource_links (resource_id, name, url, description)
-VALUES (6, 'MDN: Promises', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise', 'Official MDN page on JavaScript Promises');
+-- INSERT INTO resource_links (resource_id, name, url, description)
+-- VALUES (6, 'MDN: Promises', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise', 'Official MDN page on JavaScript Promises');
 
-INSERT INTO resource_links (resource_id, name, url, description)
-VALUES (6, 'Async/Await Video Tutorial', 'https://www.youtube.com/watch?v=V_Kr9OSfDeU', 'Fireship video explaining async/await in 100 seconds');
+-- INSERT INTO resource_links (resource_id, name, url, description)
+-- VALUES (6, 'Async/Await Video Tutorial', 'https://www.youtube.com/watch?v=V_Kr9OSfDeU', 'Fireship video explaining async/await in 100 seconds');
 
 
 -- Resource 7: Responsive Web Design

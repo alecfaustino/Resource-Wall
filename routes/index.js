@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
     LEFT JOIN resource_links ON resource_links.resource_id = resources.id
     LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
     LEFT JOIN topics ON topics.id = resource_topics.topic_id
-    ORDER BY resources.created_at DESC
+    ORDER BY resources.created_at ASC
     LIMIT 10;
   `;
 

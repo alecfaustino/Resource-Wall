@@ -123,6 +123,8 @@ router.post('/', async (req, res) => {
     const linkQueryValues = [resource.id, link.name, link.url, link.description];
     const linkResult = await db.query(linkQueryString, linkQueryValues);
     const linkResultRow = linkResult.rows[0];
+
+    // insert topic
     const topicsQueryValues = [resource.id, Number(topic)];
     const topicsResult = await db.query(topicQueryString, topicsQueryValues);
     // only a single topic (for now)

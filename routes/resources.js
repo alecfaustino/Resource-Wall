@@ -1,5 +1,6 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
+const db = require('../db/connection');
 
 /**
  * GET /resources
@@ -8,22 +9,80 @@ const router  = express.Router();
  */
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 
-  // Temporary hardcoded data
-  const userResources = [
-    { id: 1, title: 'Titile', description: 'Description', url: 'Url here', topic: 'topic', author: 'Vika' },
-    { id: 2, title: 'Titile', description: 'Description', url: 'Url here',
-    topic: 'topic',  author: 'Vika' }
-  ];
+  // TO DO: REMOVE '|| 1' DEFAULT TO 1 FOR TESTING
+  const userId = req.session.user_id || 1;
+try {
+  const userResourcesQuery = `
+  SELECT
+      resources.id,
+      resources.title,
+      resources.description,
+      resource_links.name AS link_name,
+      resource_links.url AS link_url,
+      topics.name AS topic,
+      users.name AS author
+      FROM resources
+      JOIN users ON users.id = resources.author_id
+      LEFT JOIN resource_links ON resource_links.resource_id = resources.id
+      LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
+      LEFT JOIN topics ON topics.id = resource_topics.topic_id
+      WHERE resources.author_id = $1;
+  `;
 
-  const likedResources = [
-    { id: 3, title: 'Titile', description: 'Description', url: 'Url here',
-    topic: 'topic',  author: 'Vika' },
-    { id: 4, title: 'Titile', description: 'Description', url: 'Url here', topic: 'topic', author: 'Vika' }
-  ];
+  const likedResourcesQuery = `
+  SELECT
+      resources.id,
+      resources.title,
+      resources.description,
+      resource_links.name AS link_name,
+      resource_links.url AS link_url,
+      topics.name AS topic,
+      users.name AS author
+      FROM resources
+      JOIN users ON users.id = resources.author_id
+      JOIN resource_likes ON resources.id = resource_likes.resource_id
+      LEFT JOIN resource_links ON resource_links.resource_id = resources.id
+      LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
+      LEFT JOIN topics ON topics.id = resource_topics.topic_id
+      WHERE resource_likes.user_id = $1;
+  `
 
-  res.render('resources', { userResources, likedResources });
+  const likesQuery =
+  `
+  SELECT resource_id FROM resource_likes
+  WHERE user_id = $1;
+  `;
+
+
+    const [userResourcesResult, likedResourcesResult, likesIdResult] = await Promise.all([
+      db.query(userResourcesQuery, [userId]),
+      db.query(likedResourcesQuery, [userId]),
+      db.query(likesQuery, [userId])
+    ]);
+
+    let likedResourceIds = [];
+    if(userId) {
+      const likesResult = await db.query(likesQuery, [userId]);
+      likedResourceIds = likesResult.rows.map(row => row.resource_id);
+    }
+
+    const likedResourcesMap = {};
+    for (const resourceId of likedResourceIds) {
+      likedResourcesMap[resourceId] = true;
+    }
+    res.render('resources', {
+      userResources: userResourcesResult.rows,
+      likedResources: likedResourcesResult.rows,
+      likedResourceIds,
+      likedResourcesMap,
+      user: req.session.user_id
+    });
+  } catch (error) {
+    console.error('Error loading My resource page:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 

@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
   const userId = req.session.user_id || 1;
 
   // values from the form (front end)
-  const {title, description, link} = req.body;
+  const {title, description, link, topic} = req.body;
 
   // validation if any of these required fields are not filled
   // send error message for testing in postman/seeing in client JSON
@@ -77,6 +77,14 @@ router.post('/', async (req, res) => {
   RETURNING *;
   `;
 
+  // INSERT into resource_topics table
+  const topicQueryString =
+  ` INSERT INTO resource_topics (resource_id, topic_id)
+  VALUES ($1, $2)
+  RETURNING *;
+  `
+
+
   try {
     // validate if logged in
     if (!userId) {
@@ -90,10 +98,15 @@ router.post('/', async (req, res) => {
     const linkQueryValues = [resource.id, link.name, link.url, link.description];
     const linkResult = await db.query(linkQueryString, linkQueryValues);
     const linkResultRow = linkResult.rows[0];
+    const topicsQueryValues = [resource.id, Number(topic)];
+    const topicsResult = await db.query(topicQueryString, topicsQueryValues);
+    // only a single topic (for now)
+    const insertedTopic = topicsResult.rows[0];
     // sending json
     res.status(201).json({
       resource,
-      link: linkResultRow
+      link: linkResultRow,
+      topic: insertedTopic
     })
 
   } catch (error) {

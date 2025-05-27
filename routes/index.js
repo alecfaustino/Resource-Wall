@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
       LEFT JOIN topics ON topics.id = resource_topics.topic_id
       ORDER BY resources.created_at DESC
       LIMIT 10;
-  `;
+  `; // Temporary have LEFT JOIN for testing if some of the information won't be added or displayed
 
   const likesQuery =
   `

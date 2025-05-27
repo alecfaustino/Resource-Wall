@@ -10,7 +10,11 @@ const db = require('../db/connection');
  */
 
 router.get('/', async (req, res) => {
-  const query = `
+  // this eventually needs to be changed because we have a route to get all resources (needs to be updated to be consistent with this)
+
+  // TO DO: REMOVE '|| 1' DEFAULT TO 1 FOR TESTING
+  const userId = req.session.user_id || 1
+  const resourceQuery = `
     SELECT
       resources.id,
       resources.title,
@@ -19,18 +23,40 @@ router.get('/', async (req, res) => {
       resource_links.url AS link_url,
       topics.name AS topic,
       users.name AS author
-    FROM resources
-    JOIN users ON users.id = resources.author_id
-    LEFT JOIN resource_links ON resource_links.resource_id = resources.id
-    LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
-    LEFT JOIN topics ON topics.id = resource_topics.topic_id
-    ORDER BY resources.created_at DESC
-    LIMIT 10;
+      FROM resources
+      JOIN users ON users.id = resources.author_id
+      LEFT JOIN resource_links ON resource_links.resource_id = resources.id
+      LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
+      LEFT JOIN topics ON topics.id = resource_topics.topic_id
+      ORDER BY resources.created_at DESC
+      LIMIT 10;
   `;
 
+  const likesQuery =
+  `
+  SELECT resource_id FROM resource_likes
+  WHERE user_id = $1;
+  `;
   try {
-    const result = await db.query(query);
-    res.render('index', { resources: result.rows });
+    const resourceResult = await db.query(resourceQuery);
+
+    let likedResourceIds = [];
+    if(userId) {
+      const likesResult = await db.query(likesQuery, [userId]);
+      likedResourceIds = likesResult.rows.map(row => row.resource_id);
+    }
+
+    const likedResourcesMap = {};
+    for (const resourceId of likedResourceIds) {
+      likedResourcesMap[resourceId] = true;
+    }
+    res.render('index', {
+      resources: resourceResult.rows,
+      likedResourceIds,
+      likedResourcesMap,
+      user: req.session.user_id
+
+    });
   } catch (error) {
     console.error('Error loading home page:', error);
     res.status(500).send('Internal Server Error');

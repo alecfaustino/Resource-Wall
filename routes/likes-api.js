@@ -29,7 +29,7 @@ router.post('/:resource_id', async (req, res) => {
 
     // returning json for now ... not sure how to handle this yet in final app
     res.status(201).json({
-      message: 'Resource Liked',
+      message: `Resource Liked by user: ${userId}`,
       liked: likeQueryResultRow
     })
 

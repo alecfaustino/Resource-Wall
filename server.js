@@ -36,6 +36,8 @@ const indexRoutes = require('./routes/index');
 
 const likesApiRoutes = require('./routes/likes-api');
 
+const singleCardViewRoutes = require('./routes/cardview.js');
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -51,6 +53,8 @@ app.use('/create', createResourceRoutes);
 app.use('/api/likes', likesApiRoutes);
 // Home page
 app.use('/', indexRoutes);
+app.use('/', singleCardViewRoutes);
+
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 

@@ -6,9 +6,7 @@
     <% if (links && links.length > 0) { %>
     <h4>Link:</h4>
     <p>
-      <a href="<%= links[0].url %>" target="_blank" rel="noopener noreferrer">
-        <%= links[0].name %>
-      </a>
+      <a href="<%= links[0].url %>" target="_blank"> <%= links[0].name %> </a>
     </p>
     <% } %> <% if (topics && topics.length > 0) { %>
     <h4>Topic:</h4>
@@ -26,3 +24,6 @@
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/scripts/likes.js"></script>
+<script src="/scripts/full_card.js"></script>

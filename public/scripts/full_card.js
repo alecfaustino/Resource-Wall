@@ -95,4 +95,31 @@ $(document).ready(() => {
       });
     }
   });
+
+  $("#comment-form").on("submit", function (e) {
+    e.preventDefault();
+    // content
+    const comment = $("#comment-text").val().trim();
+    const resourceId = $(this).data("resource-id");
+
+    // don't do anything if there's no comment
+    if (!comment) return;
+
+    $.ajax({
+      url: "/api/comments",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        comment,
+        resource_id: resourceId,
+      }),
+      success: () => {
+        console.log("comment successfully posted");
+        location.reload();
+      },
+      error: () => {
+        console.error("Failed to post comment");
+      },
+    });
+  });
 });

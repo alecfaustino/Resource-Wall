@@ -35,7 +35,6 @@ const createResourceRoutes = require('./routes/create');
 const indexRoutes = require('./routes/index');
 
 const likesApiRoutes = require('./routes/likes-api');
-
 const singleCardViewRoutes = require('./routes/cardview.js');
 
 // Mount all resource routes

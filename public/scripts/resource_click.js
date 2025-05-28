@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $(".resource-card").on('click', function (e) {
+    console.log('card clicked!');
     // don't allow the click when it's with the like button comment button or a link.
     if (
       // traverse the DOM tree and see if there is a match or not.

@@ -33,15 +33,23 @@ router.get('/', async (req, res) => {
   `; // Temporary have LEFT JOIN for testing if some of the information won't be added or displayed
 
   const likesQuery =
-  `
+    `
   SELECT resource_id FROM resource_likes
   WHERE user_id = $1;
   `;
+
+  const ratingsQuery = `
+    SELECT resource_id, rating
+    FROM resource_ratings
+    WHERE user_id = $1;`;
+
+
   try {
     const resourceResult = await db.query(resourceQuery);
 
+    // Likes
     let likedResourceIds = [];
-    if(userId) {
+    if (userId) {
       const likesResult = await db.query(likesQuery, [userId]);
       likedResourceIds = likesResult.rows.map(row => row.resource_id);
     }
@@ -50,10 +58,22 @@ router.get('/', async (req, res) => {
     for (const resourceId of likedResourceIds) {
       likedResourcesMap[resourceId] = true;
     }
+
+    // Ratings
+    const ratingsMap = {};
+    if (userId) {
+      const ratingsResult = await db.query(ratingsQuery, [userId]);
+      for (const row of ratingsResult.rows) {
+        ratingsMap[row.resource_id] = row.rating;
+      }
+    }
+
+
     res.render('index', {
       resources: resourceResult.rows,
       likedResourceIds,
       likedResourcesMap,
+      ratingsMap,
       user: req.session.user_id
 
     });

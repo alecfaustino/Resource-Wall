@@ -55,6 +55,11 @@ try {
   WHERE user_id = $1;
   `;
 
+   const ratingsQuery = `
+    SELECT resource_id, rating
+    FROM resource_ratings
+    WHERE user_id = $1;`;
+
 
     const [userResourcesResult, likedResourcesResult, likesIdResult] = await Promise.all([
       db.query(userResourcesQuery, [userId]),
@@ -72,11 +77,21 @@ try {
     for (const resourceId of likedResourceIds) {
       likedResourcesMap[resourceId] = true;
     }
+
+     // Ratings
+    const ratingsMap = {};
+    if (userId) {
+      const ratingsResult = await db.query(ratingsQuery, [userId]);
+      for (const row of ratingsResult.rows) {
+        ratingsMap[row.resource_id] = row.rating;
+      }
+    }
     res.render('resources', {
       userResources: userResourcesResult.rows,
       likedResources: likedResourcesResult.rows,
       likedResourceIds,
       likedResourcesMap,
+      ratingsMap,
       user: req.session.user_id
     });
   } catch (error) {

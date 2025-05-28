@@ -1,12 +1,19 @@
 <div class="resource-full-card" style="width: 24rem">
   <div class="card-body">
-    <h2><%= resource.title %></h2>
-    <p><%= resource.description %></p>
+    <h2 class="resource-title"><%= resource.title %></h2>
+    <p class="resource-description"><%= resource.description %></p>
 
     <% if (links && links.length > 0) { %>
     <h4>Link:</h4>
     <p>
-      <a href="<%= links[0].url %>" target="_blank"> <%= links[0].name %> </a>
+      <a
+        href="<%= links[0].url %>"
+        class="resource-link"
+        data-link-name="<%= links[0].name %>"
+        target="_blank"
+      >
+        <%= links[0].name %>
+      </a>
     </p>
     <% } %> <% if (topics && topics.length > 0) { %>
     <h4>Topic:</h4>

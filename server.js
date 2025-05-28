@@ -35,6 +35,7 @@ const createResourceRoutes = require('./routes/create');
 const indexRoutes = require('./routes/index');
 
 const likesApiRoutes = require('./routes/likes-api');
+const ratingApiRoutes = require('./routes/ratings-api');
 const singleCardViewRoutes = require('./routes/cardview.js');
 
 // Mount all resource routes
@@ -50,6 +51,7 @@ app.use('/resources', resourcesRoutes);
 app.use('/profile', profileRoutes);
 app.use('/create', createResourceRoutes);
 app.use('/api/likes', likesApiRoutes);
+app.use('/api/ratings', ratingApiRoutes);
 // Home page
 app.use('/', indexRoutes);
 app.use('/', singleCardViewRoutes);

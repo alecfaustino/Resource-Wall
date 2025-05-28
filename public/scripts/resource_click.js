@@ -6,6 +6,7 @@ $(document).ready(function () {
       // traverse the DOM tree and see if there is a match or not.
       // if the button we click itself is the like button, the element would find a match and return 1. If it's not the like button, it would return 0.
       // https://api.jquery.com/closest/
+      $(e.target).closest(".rating").length ||
       $(e.target).closest(".like-btn").length ||
       $(e.target).closest(".comment-btn").length ||
       // Checks if the target is an a tag

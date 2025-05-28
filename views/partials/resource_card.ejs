@@ -7,20 +7,20 @@
       <%= resource.description %>
     </p>
 
-     <!-- Resource Link -->
+    <!-- Resource Link -->
     <% if (resource.link_name && resource.link_url) { %>
       <p class="card-text">
-         <a href="<%= resource.link_url %>" target="_blank" rel="noopener noreferrer">
+        <a href="<%= resource.link_url %>" target="_blank" rel="noopener noreferrer">
           <%= resource.link_name %>
         </a>
       </p>
-    <% } %>
+      <% } %>
 
-    <div class="topic-box">
-      <p class="card-text">
-        <%= resource.topic%>
-      </p>
-    </div>
+        <div class="topic-box">
+          <p class="card-text">
+            <%= resource.topic%>
+          </p>
+        </div>
   </div>
   <div class="card-footer">
     <span class="author">Posted by: <%= resource.author %></span>
@@ -28,9 +28,11 @@
       <!-- Average Rating
      should think how user can rate resource-->
 
-      <div class="rating">
-        <% for (let i = 1; i <= 5; i++) { %>
-          <i class="fa-solid fa-star" data-index="<%= i %>"></i>
+      <div class="rating" data-resource-id="<%= resource.id %>">
+        <% const userRating=ratingsMap[resource.id]; %>
+          <% for (let i = 1; i <= 5; i++) { %>
+            <i class="fa-<%= i <= userRating ? 'solid' : 'regular' %> fa-star <%= i <= userRating ? 'selected' : '' %>"
+              data-index="<%= i %>"></i>
           <% } %>
       </div>
 
@@ -40,9 +42,9 @@
       </button>
 
       <!-- Like Button -->
-       <!-- check if the resource.id is inside of the array (from index.js for now) -->
-        <!-- userLiked will be a boolean -->
-       <% const userLiked = likedResourceIds.includes(resource.id); %>
+      <!-- check if the resource.id is inside of the array (from index.js for now) -->
+      <!-- userLiked will be a boolean -->
+      <% const userLiked=likedResourceIds.includes(resource.id); %>
         <button class="like-btn" data-resource-id="<%= resource.id %>">
           <i class="fa-<%= likedResourceIds.includes(resource.id) ? 'solid' : 'regular' %> fa-heart"></i>
         </button>

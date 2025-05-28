@@ -61,6 +61,8 @@ router.get("/resources/:id", async (req, res) => {
       likedResourceIds = likedResult.rows.map((row) => row.resource_id);
     }
 
+    console.log("user:", req.session.user_id);
+    console.log("resource.owner_id: ", resource.owner_id);
     res.render("card_view_full", {
       resource,
       links,

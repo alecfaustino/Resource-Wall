@@ -18,8 +18,10 @@
     <span>Posted by: <%= resource.author %></span>
 
     <div class="card-actions">
-      <button id="edit-btn">Edit</button>
-      <button id="delete-btn">Delete</button>
+      <button id="edit-btn" data-resource-id="<%= resource.id %>">Edit</button>
+      <button id="delete-btn" data-resource-id="<%= resource.id %>">
+        Delete
+      </button>
       <button id="return-btn">Return to Resources</button>
     </div>
   </div>

@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
 
-<head>
-  <%- include('partials/head') %>
-</head>
-
-<body>
+  <body>
     <%- include('partials/header') %>
-<main>
-  <h1>Profile</h1>
+    <main>
+      <h1>Profile</h1>
 
-  <div class="card p-4" style="max-width: 500px; margin: auto;">
+      <div class="card p-4" style="max-width: 500px; margin: auto">
+        <button id="profile-edit-btn" data-user-id="<%= user.id %>">
+          Edit
+        </button>
 
-    <button>Edit</button>
-
-    <p><strong>Name:</strong> <span><%= user.name %></span></p>
-    <p><strong>Email:</strong> <span><%= user.email %></span></p>
-
-  </div>
-  </main>
+        <p>
+          <strong>Name:</strong>
+          <span class="profile-name"><%= user.name %></span>
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <span class="profile-email"><%= user.email %></span>
+        </p>
+      </div>
+    </main>
+    <script src="/scripts/profile-edit.js"></script>
+  </body>
 </html>

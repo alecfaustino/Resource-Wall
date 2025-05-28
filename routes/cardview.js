@@ -31,6 +31,14 @@ router.get("/resources/:id", async (req, res) => {
     WHERE resource_topics.resource_id = $1;
   `;
 
+  const commentsQuery = `
+  SELECT resource_comments.comment, resource_comments.created_at, users.name AS commenter_name
+  FROM resource_comments
+  JOIN users ON users.id = resource_comments.user_id
+  WHERE resource_comments.resource_id = $1
+  ORDER BY resource_comments.created_at DESC;
+  `;
+
   try {
     const getResourceQueryResult = await db.query(getResourceQuery, [
       resourceId,
@@ -42,6 +50,9 @@ router.get("/resources/:id", async (req, res) => {
     const getLinksQueryResult = await db.query(getLinksQuery, [resourceId]);
 
     const getTopicsQueryResult = await db.query(getTopicsQuery, [resourceId]);
+
+    const commentResult = await db.query(commentsQuery, [resourceId]);
+    const comments = commentResult.rows;
 
     const resource = getResourceQueryResult.rows[0];
     const links = getLinksQueryResult.rows;
@@ -68,6 +79,7 @@ router.get("/resources/:id", async (req, res) => {
       links,
       topics,
       likedResourceIds,
+      comments,
       // TO DO Remove || 1 after testing
       user: req.session.user_id || 1,
     });

@@ -34,6 +34,28 @@
       <button id="return-btn">Return to Resources</button>
     </div>
   </div>
+
+  <div class="comments-section">
+    <h2>Comments</h2>
+
+    <ul>
+      <% for (let comment of comments) { %>
+      <li>
+        <strong><%= comment.commenter_name %></strong>: <%= comment.comment %>
+        <small>(<%= new Date(comment.created_at).toLocaleString() %>)</small>
+      </li>
+      <% } %>
+    </ul>
+
+    <form id="comment-form" data-resource-id="<%= resource.id %>">
+      <textarea
+        id="comment-text"
+        placeholder="Write a comment..."
+        required
+      ></textarea>
+      <button type="submit">Post</button>
+    </form>
+  </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/scripts/likes.js"></script>

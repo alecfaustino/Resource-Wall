@@ -17,5 +17,29 @@ body {
   );
 }
 
+
+// My resources page
+.my-resources-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.my-resources {
+    align-self: center;
+    margin: 3em;
+
+    .added-resources {
+      margin-bottom: 5em;
+    }
+  }
+
+.resource-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: start;
+  }
+
 // resource-card styling
 @import 'partials/resource_card';

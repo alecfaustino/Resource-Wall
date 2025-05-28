@@ -14,7 +14,7 @@
      <% if (userResources.length > 0) { %>
       <div class="resource-grid">
         <% userResources.forEach(resource => { %>
-          <%- include('partials/resource_card', { resource, likedResourceIds }) %>
+          <%- include('partials/resource_card', { resource, likedResourceIds, ratingsMap }) %>
         <% }) %>
       </div>
     <% } else { %>
@@ -28,7 +28,7 @@
     <% if (likedResources.length > 0) { %>
     <div class="resource-grid">
       <% likedResources.forEach(resource => { %>
-        <%- include('partials/resource_card', { resource, likedResourceIds }) %>
+        <%- include('partials/resource_card', { resource, likedResourceIds, ratingsMap}) %>
       <% }) %>
     </div>
     <% } else { %>

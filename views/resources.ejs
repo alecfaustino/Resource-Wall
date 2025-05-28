@@ -7,25 +7,33 @@
 
 <body>
     <%- include('partials/header') %>
-<main>
+<main class="my-resources">
     <!-- Created Resources -->
-  <section >
+  <section class="added-resources">
     <h2>Your Resources</h2>
-    <div>
-      <% userResources.forEach(resource => { %>
-        <%- include('partials/resource_card', { resource }) %>
-      <% }) %>
-    </div>
+     <% if (userResources.length > 0) { %>
+      <div class="resource-grid">
+        <% userResources.forEach(resource => { %>
+          <%- include('partials/resource_card', { resource, likedResourceIds }) %>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p>You haven't added any resources yet.</p>
+    <% } %>
   </section>
 
   <!-- Liked Resources -->
-  <section >
+  <section class="liked=resources">
     <h2>Your Likes</h2>
-    <div>
+    <% if (likedResources.length > 0) { %>
+    <div class="resource-grid">
       <% likedResources.forEach(resource => { %>
-        <%- include('partials/resource_card', { resource }) %>
+        <%- include('partials/resource_card', { resource, likedResourceIds }) %>
       <% }) %>
     </div>
+    <% } else { %>
+      <p>You haven't liked any resources yet.</p>
+    <% } %>
   </section>
   </main>
 </html>

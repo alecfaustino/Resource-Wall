@@ -7,37 +7,20 @@ $(document).ready(function () {
       const query = $(this).val().trim();
 
       $.ajax({
-        url: '/api/resources',
+        url: '/api/index',
         method: 'GET',
         cache: false,
         data: { search: query },
-        success: function (resources) {
+        success: function (html) {
           const $grid = $('.masonry-grid');
           $grid.empty();
 
-          if (resources.length === 0) {
+          if (!html.trim()) {
             $grid.append('<p class="text-center">No results found</p>');
             return;
           }
-          // Build a card for each resource if search succesful
-          resources.forEach(resource => {
-            const $card = $(`
-            <div class="masonry-item">
-              <div class="resource-card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">${resource.title}</h5>
-                  <p class="card-text">${resource.description}</p>
-                  ${resource.link_url ? `<p><a href="${resource.link_url}" target="_blank">${resource.link_name}</a></p>` : ''}
-                  ${resource.topic ? `<p>Topic: ${resource.topic}</p>` : ''}
-                </div>
-                <div class="card-footer">
-                  <span class="author">Posted by: ${resource.author}</span>
-                </div>
-              </div>
-            </div>
-          `);
-            $grid.append($card);
-          });
+
+          $grid.append(html); // add rendered cards
         },
         error: function (err) {
           console.error('Search error:', err);

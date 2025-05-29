@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
 
-<head>
-  <%- include('partials/head') %>
-</head>
+  <body>
+    <%- include('partials/header') %>
 
-<body>
-  <%- include('partials/header') %>
+    <main class="container pt-5 mt-4">
+      <!-- Search Bar -->
+      <div class="search-bar mb-4 d-flex justify-content-center">
+        <input
+          type="text"
+          class="form-control search-input"
+          placeholder="Search resources..."
+          style="max-width: 500px"
+        />
+      </div>
 
-  <main class="container pt-5 mt-4">
+      <h1 class="mb-4 text-center">Browse</h1>
 
-    <!-- Search Bar -->
-    <div class="search-bar mb-4 d-flex justify-content-center">
-      <input
-        type="text"
-        class="form-control search-input"
-        placeholder="Search resources..."
-        style="max-width: 500px;"
-      />
-    </div>
-
-    <h1 class="mb-4 text-center">Browse</h1>
-
-
-    <!-- Masonry Grid -->
-    <div
-      class="masonry-grid"
-      data-masonry='{"itemSelector": ".masonry-item", "gutter": 20}'>
-      <% if (resources.length===0) { %>
+      <!-- Masonry Grid -->
+      <div class="masonry-grid">
+        <% if (resources.length===0) { %>
         <p class="text-center">No resources found.</p>
-        <% } else { %>
-          <% resources.forEach(resource=> { %>
-            <div class="masonry-item">
-              <%- include('partials/resource_card', { resource, userLiked: likedResourcesMap[resource.id], userRating: ratingsMap[resource.id]}) %>
-            </div>
-          <% }) %>
-        <% } %>
-    </div>
-  </main>
+        <% } else { %> <% resources.forEach(resource=> { %>
+        <div class="masonry-item">
+          <%- include('partials/resource_card', { resource, userLiked:
+          likedResourcesMap[resource.id], userRating: ratingsMap[resource.id]})
+          %>
+        </div>
+        <% }) %> <% } %>
+      </div>
+    </main>
 
-  <script src="/scripts/likes.js"></script>
-  <script src="/scripts/resource_click.js"></script>
-
-</body>
-
+    <script src="/scripts/likes.js"></script>
+    <script src="/scripts/resource_click.js"></script>
+  </body>
 </html>

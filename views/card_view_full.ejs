@@ -1,62 +1,85 @@
-<div class="resource-full-card" style="width: 24rem">
-  <div class="card-body">
-    <h2 class="resource-title"><%= resource.title %></h2>
-    <p class="resource-description"><%= resource.description %></p>
+<!DOCTYPE html>
+<html lang="en">
 
-    <% if (links && links.length > 0) { %>
-    <h4>Link:</h4>
-    <p>
-      <a
-        href="<%= links[0].url %>"
-        class="resource-link"
-        data-link-name="<%= links[0].name %>"
-        target="_blank"
-      >
-        <%= links[0].name %>
-      </a>
-    </p>
-    <% } %> <% if (topics && topics.length > 0) { %>
-    <h4>Topic:</h4>
-    <p><%= topics[0].topic_name %></p>
-    <% } %>
-  </div>
+<head>
+  <%- include('partials/head') %>
+</head>
 
-  <div class="card-footer">
-    <span>Posted by: <%= resource.author %></span>
+<body>
+  <%- include('partials/header') %>
 
-    <div class="card-actions">
-      <% if (Number(user) === Number(resource.author_id)) { %>
-      <button id="edit-btn" data-resource-id="<%= resource.id %>">Edit</button>
-      <button id="delete-btn" data-resource-id="<%= resource.id %>">
-        Delete
-      </button>
-      <% } %>
-      <button id="return-btn">Return to Resources</button>
-    </div>
-  </div>
+      <div class="resource-full-card" style="width: 24rem">
+        <% if (Number(user)===Number(resource.author_id)) { %>
+          <button id="edit-btn" data-resource-id="<%= resource.id %>" class="edit-btn">Edit</button>
+          <% } %>
+            <div class="card-body">
+              <h2 class="resource-title">
+                <%= resource.title %>
+              </h2>
+              <p class="resource-description">
+                <%= resource.description %>
+              </p>
 
-  <div class="comments-section">
-    <h2>Comments</h2>
+              <% if (links && links.length> 0) { %>
+                <h4>Resources:</h4>
+                <p>
+                  <a href="<%= links[0].url %>" class="resource-link" data-link-name="<%= links[0].name %>"
+                    target="_blank">
+                    <%= links[0].name %>
+                  </a>
+                </p>
+                <% } %>
+                  <% if (topics && topics.length> 0) { %>
+                    <!-- <h4>Topic:</h4> -->
+                     <div class="topic-box">
+                    <p class="topic-text">
+                      <%= topics[0].topic_name %>
+                    </p>
+                    <% } %>
+                  </div>
+            </div>
 
-    <ul>
-      <% for (let comment of comments) { %>
-      <li>
-        <strong><%= comment.commenter_name %></strong>: <%= comment.comment %>
-        <small>(<%= new Date(comment.created_at).toLocaleString() %>)</small>
-      </li>
-      <% } %>
-    </ul>
+            <div class="card-footer">
+              <span>Posted by: <%= resource.author %></span>
 
-    <form id="comment-form" data-resource-id="<%= resource.id %>">
-      <textarea
-        id="comment-text"
-        placeholder="Write a comment..."
-        required
-      ></textarea>
-      <button type="submit">Post</button>
-    </form>
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/scripts/likes.js"></script>
-<script src="/scripts/full_card.js"></script>
+
+                <!-- <% if (Number(user)===Number(resource.author_id)) { %>
+                  <button id="edit-btn" data-resource-id="<%= resource.id %>">Edit</button>
+                  <button id="delete-btn" data-resource-id="<%= resource.id %>">
+                    Delete
+                  </button>
+                  <% } %> -->
+                <button id="return-btn">Return to Resources</button>
+
+            </div>
+
+            <div class="comments-section">
+              <h2>Comments</h2>
+
+              <ul>
+                <% for (let comment of comments) { %>
+                  <li>
+                    <strong>
+                      <%= comment.commenter_name %>
+                    </strong>: <%= comment.comment %>
+                      <small>(<%= new Date(comment.created_at).toLocaleString() %>)</small>
+                  </li>
+                  <% } %>
+              </ul>
+
+              <form id="comment-form" data-resource-id="<%= resource.id %>">
+                <textarea id="comment-text" placeholder="Write a comment..." required></textarea>
+                <button id="post-btn">Post</button>
+              </form>
+            </div>
+            <% if (Number(user)===Number(resource.author_id)) { %>
+              <button id="delete-btn" data-resource-id="<%= resource.id %>" class="delete-btn">Delete</button>
+              <% } %>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="/scripts/likes.js"></script>
+      <script src="/scripts/full_card.js"></script>
+
+</body>
+
+</html>

@@ -7,7 +7,7 @@
 
 <body>
   <%- include('partials/header') %>
-
+    <main>
       <div class="resource-full-card" style="width: 24rem">
         <% if (Number(user)===Number(resource.author_id)) { %>
           <button id="edit-btn" data-resource-id="<%= resource.id %>" class="edit-btn">Edit</button>
@@ -31,25 +31,25 @@
                 <% } %>
                   <% if (topics && topics.length> 0) { %>
                     <!-- <h4>Topic:</h4> -->
-                     <div class="topic-box">
-                    <p class="topic-text">
-                      <%= topics[0].topic_name %>
-                    </p>
-                    <% } %>
-                  </div>
+                    <div class="topic-box">
+                      <p class="topic-text">
+                        <%= topics[0].topic_name %>
+                      </p>
+                      <% } %>
+                    </div>
             </div>
 
             <div class="card-footer">
               <span>Posted by: <%= resource.author %></span>
 
 
-                <!-- <% if (Number(user)===Number(resource.author_id)) { %>
+              <!-- <% if (Number(user)===Number(resource.author_id)) { %>
                   <button id="edit-btn" data-resource-id="<%= resource.id %>">Edit</button>
                   <button id="delete-btn" data-resource-id="<%= resource.id %>">
                     Delete
                   </button>
                   <% } %> -->
-                <button id="return-btn">Return to Resources</button>
+              <button id="return-btn">Return to Resources</button>
 
             </div>
 
@@ -79,7 +79,7 @@
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="/scripts/likes.js"></script>
       <script src="/scripts/full_card.js"></script>
-
+    </main>
 </body>
 
 </html>

@@ -8,41 +8,41 @@
 <body>
   <%- include('partials/header') %>
 
-    <main>
+    <main class="create-card">
       <h1>Create New Card</h1>
 
       <form id="create-form" class="border p-4 rounded bg-light" method="POST" action="/api/resources">
         <!-- Card title -->
-        <div>
+        <div class="form-group">
           <label for="card-title">Card title</label>
           <input type="text" name="title" required>
         </div>
 
         <!-- Card description -->
-        <div>
+        <div class="form-group">
           <label for="card-description">Card description</label>
           <input type="text" name="description" required>
         </div>
 
         <!-- Link info -->
-        <div>
+        <div class="form-group">
           <label for="link-name">Resource Name</label>
           <input type="text" name="link[name]" id="link-name" class="form-control" required>
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="link-url">URL</label>
           <input type="url" id="link-url" name="link[url]" class="form-control" required>
         </div>
 
-        <div>
+        <div class="form-group">
           <label for="link-description">Resource Description</label>
           <textarea id="link-description" name="link[description]" rows="3" class="form-control" required></textarea>
         </div>
 
         <!-- Choose topic -->
         <!-- hard coded topics for now-->
-        <div>
+        <div class="form-group">
           <label for="topic">Topic</label>
           <select id="topic" class="form-control" required>
             <option value="">Choose a topic</option>

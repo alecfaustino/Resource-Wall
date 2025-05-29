@@ -1,0 +1,66 @@
+.create-card {
+  position: relative;
+  width: 100%;
+  background-color: aliceblue;
+  padding: 1.5rem;
+  margin-top: 4rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+
+
+
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      background-color: white;
+
+      &:focus {
+        outline: none;
+        border-color: #5ca2ee;
+        box-shadow: 0 0 0 2px rgba(92, 162, 238, 0.2);
+      }
+    }
+  }
+
+  button[type='submit'] {
+    background-color: #5ca2ee;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: block;
+    margin: 1.5rem auto 0;
+
+    &:hover {
+      background-color: #86c0ff;
+    }
+  }
+
+}

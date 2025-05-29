@@ -16,7 +16,9 @@ body {
     rgba(163, 208, 219, 1) 100%
   );
 }
-
+// main {
+//   margin-top: 3rem;
+// }
 
 // My resources page
 .my-resources-container {
@@ -43,4 +45,5 @@ body {
 
 // resource-card styling
 @import 'partials/resource_card';
-@import './full_card'
+@import './full_card';
+@import './add_resources.scss';

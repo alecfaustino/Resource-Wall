@@ -1,7 +1,7 @@
 $(document).ready(() => {
   // highlight stars up to the one hovered
-  $(".rating i")
-    .on("mouseenter", function () {
+
+    $(document).on("mouseenter", ".rating i", function () {
       const index = $(this).data("index");
       const $container = $(this).closest(".rating");
 
@@ -22,7 +22,7 @@ $(document).ready(() => {
       });
     })
     // logic when mouse away from the stars
-    .on("mouseleave", function () {
+    .on("mouseleave", ".rating i", function () {
       const $container = $(this).closest(".rating");
 
       $container.find("i").each(function () {
@@ -39,7 +39,7 @@ $(document).ready(() => {
     });
 
   // CLICK: Save rating and apply selected state
-  $(".rating i").on("click", function () {
+  $(document).on("click", ".rating i", function () {
     const index = $(this).data("index");
     const $container = $(this).closest(".rating");
     const resourceId = $container.data("resource-id");

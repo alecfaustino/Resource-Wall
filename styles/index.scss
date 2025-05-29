@@ -1,0 +1,33 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  justify-content: center;
+}
+
+
+// Title
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+// Masonry Grid
+.masonry-grid {
+  display: grid;
+  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0 auto;
+
+  .masonry-item {
+    display: flex;
+    margin: 0 10px;
+    justify-content: center;
+  }
+}

@@ -1,7 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../db/connection');
-
+const db = require("../db/connection");
 
 /**
  * GET '/index'
@@ -9,11 +8,11 @@ const db = require('../db/connection');
  * Should dispaly all recently added resources by all users. currently limited by 10 resources
  */
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   // this eventually needs to be changed because we have a route to get all resources (needs to be updated to be consistent with this)
 
   // TO DO: REMOVE '|| 1' DEFAULT TO 1 FOR TESTING
-  const userId = req.session.user_id || 1
+  const userId = req.session.user_id || 1;
   const resourceQuery = `
     SELECT
       resources.id,
@@ -29,11 +28,10 @@ router.get('/', async (req, res) => {
       LEFT JOIN resource_topics ON resource_topics.resource_id = resources.id
       LEFT JOIN topics ON topics.id = resource_topics.topic_id
       ORDER BY resources.created_at DESC
-      LIMIT 10;
+      LIMIT 9;
   `; // Temporary have LEFT JOIN for testing if some of the information won't be added or displayed
 
-  const likesQuery =
-    `
+  const likesQuery = `
   SELECT resource_id FROM resource_likes
   WHERE user_id = $1;
   `;
@@ -43,7 +41,6 @@ router.get('/', async (req, res) => {
     FROM resource_ratings
     WHERE user_id = $1;`;
 
-
   try {
     const resourceResult = await db.query(resourceQuery);
 
@@ -51,7 +48,7 @@ router.get('/', async (req, res) => {
     let likedResourceIds = [];
     if (userId) {
       const likesResult = await db.query(likesQuery, [userId]);
-      likedResourceIds = likesResult.rows.map(row => row.resource_id);
+      likedResourceIds = likesResult.rows.map((row) => row.resource_id);
     }
 
     const likedResourcesMap = {};
@@ -68,18 +65,16 @@ router.get('/', async (req, res) => {
       }
     }
 
-
-    res.render('index', {
+    res.render("index", {
       resources: resourceResult.rows,
       likedResourceIds,
       likedResourcesMap,
       ratingsMap,
-      user: req.session.user_id
-
+      user: req.session.user_id,
     });
   } catch (error) {
-    console.error('Error loading home page:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error loading home page:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
